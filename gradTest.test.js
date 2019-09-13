@@ -6,7 +6,7 @@ function getChildArray(menu, parent) {
       return menu[j].data;
     }
   }
-  // Create a new parent & push it to menu
+  // Create a new parent Object & push it to menu
   var newParent = {title: parent, data: []}
   menu.push(newParent);
   return menu[menu.length - 1].data;
@@ -18,12 +18,12 @@ function createMenuData(data) {
   for (var i = 0; i < data.length; i++) {
     var parentAndChild = data[i].split("/");
     var childs = getChildArray(menu, parentAndChild[0]);
-    if(parentAndChild[1] != null) {
-          childs.push(parentAndChild[1]);
+    if(parentAndChild[1] != null) { // data element contains a child
+      childs.push(parentAndChild[1]);
     }
   }
 
-  // Filtering out parents with empty child
+  // Filtering out parents with no child
   var result = [];
   for (i = 0; i < menu.length; i++) {
     if(menu[i].data.length != 0) {
